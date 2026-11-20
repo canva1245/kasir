@@ -1,0 +1,6 @@
+Lisensi proyek KasirKita
+
+Hak penggunaan dan distribusi belum ditetapkan secara otomatis oleh file ini.
+Sebelum menjual atau mendistribusikan source code, tentukan lisensi yang jelas
+dan pastikan seluruh kode, font, ikon, serta aset yang digunakan memang boleh
+didistribusikan secara komersial.

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="KasirKita - Sistem kasir sederhana untuk UMKM.">
+  <title>KasirKita — Kasir UMKM</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand"><div class="brand-mark">K</div><div><strong>KasirKita</strong><small>Kasir UMKM</small></div></div>
+      <div class="side-label">MENU UTAMA</div>
+      <nav class="nav-menu">
+        <button class="nav-link active" data-page="dashboard"><span>▦</span> Dashboard</button>
+        <button class="nav-link" data-page="kasir"><span>▣</span> Kasir</button>
+        <button class="nav-link" data-page="produk"><span>□</span> Produk</button>
+        <button class="nav-link" data-page="riwayat"><span>◷</span> Riwayat Transaksi</button>
+        <button class="nav-link" data-page="laporan"><span>▤</span> Laporan</button>
+      </nav>
+      <div class="sidebar-bottom"><div class="store-avatar">U</div><div><strong id="sideStoreName">Usaha Saya</strong><small>Administrator</small></div></div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="menu-toggle" id="menuToggle" aria-label="Buka menu">☰</button>
+        <div><div class="eyebrow" id="pageEyebrow">RINGKASAN USAHA</div><h1 id="pageTitle">Dashboard</h1></div>
+        <div class="topbar-right"><span class="today" id="todayLabel"></span><div class="user-chip">A</div></div>
+      </header>
+
+      <section class="page active" id="page-dashboard">
+        <div class="welcome-card"><div><span class="welcome-tag">SELAMAT DATANG 👋</span><h2>Kelola usaha jadi lebih mudah.</h2><p>Pantau penjualan dan aktivitas tokomu dari satu tempat.</p></div><div class="welcome-art">✦</div></div>
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-top"><span>Total Penjualan Hari Ini</span><span class="stat-icon">↗</span></div><strong id="todaySales">Rp0</strong><small id="todayCount">0 transaksi hari ini</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Total Transaksi</span><span class="stat-icon">▣</span></div><strong id="totalTransactions">0</strong><small>Seluruh transaksi tersimpan</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Jumlah Produk</span><span class="stat-icon">□</span></div><strong id="totalProducts">0</strong><small>Produk dalam katalog</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Stok Menipis</span><span class="stat-icon warning">!</span></div><strong id="lowStock">0</strong><small>Produk dengan stok ≤ 5</small></article>
+        </div>
+        <div class="content-grid">
+          <article class="panel"><div class="panel-heading"><div><h3>Transaksi Terbaru</h3><p>Aktivitas penjualan terakhir</p></div><button class="text-button" data-goto="riwayat">Lihat semua →</button></div><div id="recentTransactions" class="table-wrap"></div></article>
+          <article class="panel quick-panel"><div class="panel-heading"><div><h3>Akses Cepat</h3><p>Mulai aktivitas tokomu</p></div></div><button class="quick-action" data-goto="kasir"><span>＋</span><div><strong>Buat transaksi</strong><small>Catat penjualan baru</small></div><b>→</b></button><button class="quick-action" data-goto="produk"><span>□</span><div><strong>Kelola produk</strong><small>Atur katalog dan stok</small></div><b>→</b></button></article>
+        </div>
+      </section>
+
+      <section class="page" id="page-kasir">
+        <div class="pos-layout">
+          <div class="panel product-picker"><div class="panel-heading"><div><h3>Pilih Produk</h3><p>Pilih produk untuk dimasukkan ke keranjang</p></div></div><input class="search-input" id="productSearch" placeholder="Cari nama produk..."><div class="product-grid" id="posProducts"></div></div>
+          <div class="panel cart-panel"><div class="panel-heading"><div><h3>Keranjang</h3><p id="cartCount">0 item</p></div><button class="text-button" id="clearCart">Kosongkan</button></div><div id="cartItems" class="cart-items"><div class="empty-state">Keranjang masih kosong.</div></div><div class="cart-summary"><div><span>Subtotal</span><strong id="cartSubtotal">Rp0</strong></div><div class="total-line"><span>Total</span><strong id="cartTotal">Rp0</strong></div><label for="paymentAmount">Uang diterima</label><input id="paymentAmount" class="search-input" type="number" min="0" placeholder="Masukkan nominal pembayaran"><div class="change-line"><span>Kembalian</span><strong id="changeAmount">Rp0</strong></div><button class="primary-button full-button" id="checkoutButton">Proses Pembayaran</button></div></div>
+        </div>
+      </section>
+
+      <section class="page" id="page-produk">
+        <div class="panel"><div class="panel-heading wrap-heading"><div><h3>Daftar Produk</h3><p>Kelola nama, harga, dan stok barang</p></div><button class="primary-button" id="addProductButton">＋ Tambah Produk</button></div><div class="table-wrap" id="productsTable"></div></div>
+      </section>
+
+      <section class="page" id="page-riwayat">
+        <div class="panel"><div class="panel-heading"><div><h3>Riwayat Transaksi</h3><p>Daftar transaksi yang telah tercatat</p></div><button class="secondary-button" id="exportTransactions">Unduh CSV</button></div><div class="table-wrap" id="transactionsTable"></div></div>
+      </section>
+
+      <section class="page" id="page-laporan">
+        <div class="stats-grid report-stats"><article class="stat-card"><div class="stat-top"><span>Total Omzet</span><span class="stat-icon">↗</span></div><strong id="reportRevenue">Rp0</strong><small>Akumulasi penjualan</small></article><article class="stat-card"><div class="stat-top"><span>Jumlah Transaksi</span><span class="stat-icon">▣</span></div><strong id="reportCount">0</strong><small>Transaksi tersimpan</small></article><article class="stat-card"><div class="stat-top"><span>Rata-rata Transaksi</span><span class="stat-icon">◷</span></div><strong id="reportAverage">Rp0</strong><small>Nilai rata-rata transaksi</small></article></div>
+        <div class="panel"><div class="panel-heading"><div><h3>Ringkasan Penjualan</h3><p>Penjualan berdasarkan tanggal transaksi</p></div></div><div id="salesReport" class="report-list"></div></div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="productModal">
+    <form class="modal" id="productForm">
+      <div class="modal-heading"><div><h3 id="modalTitle">Tambah Produk</h3><p>Isi informasi produk di bawah ini.</p></div><button type="button" class="close-button" id="closeModal">×</button></div>
+      <input type="hidden" id="productId">
+      <label for="productName">Nama produk</label><input id="productName" required maxlength="60" placeholder="Contoh: Kopi Susu">
+      <div class="form-row"><div><label for="productPrice">Harga (Rp)</label><input id="productPrice" type="number" min="1" required placeholder="15000"></div><div><label for="productStock">Stok</label><input id="productStock" type="number" min="0" required placeholder="20"></div></div>
+      <div class="modal-actions"><button type="button" class="secondary-button" id="cancelModal">Batal</button><button type="submit" class="primary-button">Simpan Produk</button></div>
+    </form>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="js/app.js"></script>
+</body>
+</html>
